@@ -53,7 +53,7 @@ x   kill pane
 {   move the current pane left
 }   move the current pane right
 z   toggle pane zoom
-CTRL-
+<C-c>↕/↔    resize pane
 
 # Windows
 c   create window
