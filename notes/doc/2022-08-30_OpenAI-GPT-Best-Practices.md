@@ -1,9 +1,10 @@
 ---
-ate: 2023-08-30
+date: 2023-08-30
 tags:
     - doc
 hubs:
-    - "[[]]"
+    - "[[llms]]"
+    - "[[prompts]]"
 urls:
     - https://platform.openai.com/docs/guides/gpt-best-practices/gpt-best-practices
 ---

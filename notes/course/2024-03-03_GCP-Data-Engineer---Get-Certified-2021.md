@@ -1,12 +1,12 @@
 ---
 date: 2021-10-13
 tags:
-    - course
+  - course
 hubs:
-    - "[[data-engineering]]"
-    - "[[gcp]]"
+  - "[[data-engineering]]"
+  - "[[gcp]]"
 urls:
-    - https://ayima.udemy.com/course/google-cloud-professional-data-engineer-get-certified/
+  - https://www.udemy.com/course/google-cloud-professional-data-engineer-get-certified/
 ---
 
 # GCP Data Engineer - Get Certified 2021

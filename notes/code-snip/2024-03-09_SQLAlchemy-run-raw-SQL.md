@@ -1,21 +1,15 @@
 ---
-date: 2023-08-31
+date: 2020-03-09
 tags:
-    - cookbook
+    - code-snip
 hubs:
     - "[[python]]"
+    - "[[sql]]"
+    - "[[postgresql]]"
 ---
 
+# SQLAlchemy run raw SQL
 
-# Python Cookbook
----
-
-Flatten a list
-```python
-[item for row in data for item in row]
-```
----
-sqlalchemy run raw SQL
 ```python
 def get_engine():
     import sqlalchemy
@@ -73,27 +67,3 @@ def upload_table(df, engine, s3_bucket):
     with engine.connect() as conn:
         result = conn.execute(sql_cmd)
 ```
----
-Save to excel file (with no URL limit)
-```python
-with pd.ExcelWriter('file.xlsx', options={'strings_to_urls': False}) as f:
-	df.to_excel(writer, 'content', index=False)
-	df_links.to_excel(writer, 'links', index=False)
-	writer.save()
-```
----
-Jupyter virtual environments
-```python
-# https://janakiev.com/blog/jupyter-virtual-envs/
-
-# To add
-python -m venv venv
-source myenv/bin/activate
-pip install --user ipykernel
-python -m ipykernel install --user --name=myenv
-
-# To remove
-jupyter kernelspec list
-jupyter kernelspec uninstall myenv
-```
-

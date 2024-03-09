@@ -1,12 +1,12 @@
 ---
 date: 2021-10-13
 tags:
-    - course
+  - course
 hubs:
-    - "[[data-engineering]]"
-    - "[[bigquery]]"
+  - "[[data-engineering]]"
+  - "[[bigquery]]"
 urls:
-    - https://ayima.udemy.com/course/bigquery/learn
+  - https://www.udemy.com/course/bigquery/
 ---
 
 # BigQuery for Big Data Engineers   Master BigQuery Internals

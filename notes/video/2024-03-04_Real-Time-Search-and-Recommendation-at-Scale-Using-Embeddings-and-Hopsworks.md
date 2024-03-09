@@ -1,13 +1,13 @@
 ---
 date: 2024-03-04
 tags:
-    - video
+  - video
 hubs:
-    - "[[machine-learning]]"
+  - "[[machine-learning]]"
 urls:
-    - https://www.youtube.com/watch?v=9vBRjGgdyTY
-    - https://github.com/logicalclocks/hopsworks-tutorials/tree/master/advanced_tutorials/recommender-system
-    - https://app.hopsworks.ai/
+  - https://www.youtube.com/watch?v=9vBRjGgdyTY
+  - https://github.com/logicalclocks/hopsworks-tutorials/tree/master/advanced_tutorials/recommender-system
+  - https://app.hopsworks.ai/
 ---
 
 # Real Time Search and Recommendation at Scale Using Embeddings and Hopsworks

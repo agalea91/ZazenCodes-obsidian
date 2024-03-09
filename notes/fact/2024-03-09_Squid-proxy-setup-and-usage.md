@@ -1,21 +1,16 @@
 ---
-date: 2022-04-04
+date: 2020-03-09
 tags:
-    - cookbook
+    - fact
 hubs:
     - "[[linux]]"
+urls:
+    - https://linuxize.com/post/how-to-install-and-configure-squid-proxy-on-ubuntu-20-04/
 ---
 
-# Linux Cookbook
-
-# Linux Cookbook
----
-
-Set up baisc squid proxy
+# Squid proxy setup and usage
 
 ```bash
-# https://linuxize.com/post/how-to-install-and-configure-squid-proxy-on-ubuntu-20-04/
-
 # Install squid
 sudo apt update
 sudo apt install squid
@@ -51,28 +46,3 @@ python
 # Access with chrome
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --user-data-dir="$HOME/proxy-profile" --proxy-server="http://XXXXXXXXX:3128"
 ```
-
----
-
-Basic nginx auth
-
-```bash
-# install nginx
-
-sudo apt-get update
-sudo apt-get install nginx
-
-echo -n 'user-name:' >> /etc/nginx/.htpasswd
-openssl passwd -apr1 >> /etc/nginx/.htpasswd
-
-# add auth_basic and auth_basic_user_file to location block:
-# location / {
-#   try_files $uri $uri/ =404;
-#   auth_basic "Restricted Content";
-#   auth_basic_user_file /etc/nginx/.htpasswd;
-# }
-
-# then restart after making any changes
-sudo service nginx restart
-```
-

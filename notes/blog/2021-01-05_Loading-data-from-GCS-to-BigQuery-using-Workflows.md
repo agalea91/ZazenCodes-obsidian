@@ -3,7 +3,8 @@ date: 2021-10-05
 tags:
     - blog
 hubs:
-    - "[[]]"
+    - "[[gcp]]"
+    - "[[bigquery]]"
 urls:
     - https://cloud.google.com/architecture/serverless-orchestration-loading-data-from-cloud-storage-to-biquery-using-workflows?hl=en
 ---
