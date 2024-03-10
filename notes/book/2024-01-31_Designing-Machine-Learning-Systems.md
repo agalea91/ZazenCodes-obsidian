@@ -5,10 +5,8 @@ tags:
 hubs:
     - "[[machine-learning]]"
 ---
-
 # Designing Machine Learning Systems
-
-Chip Huyen
+Author: Chip Huyen
 
 # Index
 - Overview of ML systems
@@ -23,39 +21,50 @@ Chip Huyen
 - The human side of ML
 
 # Overview of ML systems
+
 - Different stakeholders have different objectives, eg
     - ML engineers: want a model that recommends restaurants users are most likely to order from
     - Sales team: wants a model that recommends most expensive restaurants that have best service fees
     - Product team: wants a model thats fast because latency causes drop in orders
     - ML platform team: wants to delay the next model because platform should be upgraded first
     - Manager: wants to maximize margin and is considering laying off ML team
+	
 - Different objectives (eg ML and product teams above) can be handled with two separate models whose predictions are combined
+
 - Its common to classify latency of serving responses in terms of percentile, eg 90th percentile or 99.9th percentile must be below a certain threshold. Higher percentiles are important because they are more likely to represent your top customers
+
 - Examples of potential bias-introducing features: zip code, spelling of your name, credit score. Think: guilty by association. Not good. We want guilty by proof.
 
 # ML system design
 - Problem framing
     - Eg Predict app the user is going to open- better to treat it as a regression problem where each app is scored separately, rather than a single classification problem that outputs a vector of size N, where N is the number of apps
+
 - Objective functions
     - Most commonly used: RMSE for regression, log loss for binary classification, cross entry for multi-class classification
+
 - Decoupling
     - When there are multiple objectives, eg minimize quality loss of content censoring and minimize engagement loss, it’s a good idea to decouple them. It makes model maintenance easier. One model may need frequent re-raining but the other might be more static. You can combine the model outputs (with parametrized weighting, manually set or optimized somehow) to serve the final prediction, eg the order of posts
-- Hierarchy of needs
-    - https://hackernoon.com/the-ai-hierarchy-of-needs-18f111fcc007 -
-    - ![[Pasted image 20240114095921.png]]
+
+Hierarchy of needs:
+![[Pasted image 20240114095921.png]]
 
 # Training data
+
 - sampling causes bias, but is usually unavoidable
     - eg models trained on more available real-world data (llms, self driving cars)
     - Random sampling may completely exclude certain rare classes
+
 - Reservoir sampling useful for streaming data (maintain group of randomly sampled records, swapping in new ones with some probability as they come in)
+
 - Data lineage
     - Track the origin of each of your data samples, as well as its labels
     - Training data from multiple sources can cause models to fail mysteriously
+
 - Feedback loops
     - e.g. long feedback loop = fraudulent transactions, 1-3 months
     - e.g. short feedback loop = digital ad, measure clicks within minutes
     - frequent events can be a source of more feedback data (e.g. product view VS purchase) but are weaker signal
+
 - Handling sparsely labeled data
     - Weak supervision
         - Use labeling function e.g. regex
@@ -75,6 +84,7 @@ Chip Huyen
         - Common metric is uncertainty measurement - label the samples that the model is mot uncertain about
         - Another metic is disagreement from multiple models - label the samples that each model disagrees about the most
         - Highly useful/applicable for realtime systems
+
 - Class imbalance
     - Different percentiles might have different accuracy requirements, e.g. small error on very high costs = a very high cost difference!
     - ML generally works poorly on imbalanced data
@@ -95,6 +105,7 @@ Chip Huyen
     - algorithm-level methods
         - Many involve adjustments to the loss function
         - Eg cost-sensitive learning, class-balanced loss, focal loss
+
 - Data augmentation
     - Make models more robust to noise and adversarial attacks
     - Label-preserving
@@ -106,22 +117,28 @@ Chip Huyen
         - Can use templates to generate training data, e.g. "find me a [food category] restaurant within [x] miles of [location]"
 
 # Feature engineering
+
 - Filling missing data
     - Delete / input
+
 - Scaling
     - Standardization or min/max (0-1)
     - Log transforms good for skewed data, to make it more normal
+
 - Handling new categorical variables (not seen during training)
     - e.g. new brand on Amazon lists products, model does not know if it should show those products or not
     - Solution is he hashing trick
         - Hash category names in fixed space
         - Unseen categories (e.g. brands) will get assigned position in that space
         - Also helps reduce size of high-dimensional data sets
+
 - Feature crossing
     - Makes learning non-linear relationships between variables easier
+
 - Embeddings
     - Maps variable-length value onto fixed-length vector space
     - Positional embeddings involve e.g. the position of words in a sentence
+
 - Data leakage
     - When some form of the label sneaks into the feature in a way that's unrelated to inference
         - e.g. different CT scans used for different patients, high-res machine used on patience at higher risk of cancer, model learns that high-res images more likely to be cancer, regardless of test result
@@ -137,6 +154,7 @@ Chip Huyen
     - General tips for avoiding
         - Be skeptical about features that the model determines to be the most important
         - Be careful about how you do train/test splits
+
 - Good features
     - Too many features can be bad
         - More opportunities for data leakage
@@ -147,6 +165,7 @@ Chip Huyen
     - How well does the feature generalize? Will future samples actually have that feature available as a predictor?
 
 # Model development and offline evaluation
+
 - Knowledge of common ML tasks and typical approaches is essential
     - Classification: assign label, e.g. spam detection
         - SVM, random forest, gradient boost *(objective e.g. Minimize cross-entropy loss)*
@@ -164,10 +183,12 @@ Chip Huyen
         - DQN, policy gradient *(objective e.g. Reward maximization)*
     - Recommendation systems: suggest items, e.g. movie recommendations
         - Collaborative filtering, content-based filtering *(objective e.g. Ranking-based loss)*
+
 - Model-selection tips
     - Avoid state of the art (research doesn't always translate effectively to real-world)
     - Start simple (Easier to deploy for MLops validation, benchmark, easy to understand and debug as you develop it)
     - Understand model assumptions (e.g. input data is independent and identically distributed (neural network assumption), linear boundaries (linear regression), conditionally independent (features for naieve bayes))
+
 - Ensembles
     - Motivation
         - Capture different patterns
@@ -177,6 +198,7 @@ Chip Huyen
         - Bagging: random sample with replacement (e.g. random forest)
         - Boosting: future models trained on samples that get misclassified by previous iterations (e.g. boosted tree)
         - Stacking: average vote from different base models
+
 - Experiment tracking
     - Loss curve corresponding to the training and validation data
     - Model performance (e.g. MSE, F1)
@@ -184,8 +206,10 @@ Chip Huyen
     - Speed of training (steps/second, or tokens/second)
     - System performance metrics (CPU/GPU, memory)
     - Hyperparameter values over time
+
 - AutoML
     - Never use test split to tune hyperparameters, use the validation split
+
 - Phases of ML model development
     - 1. Before ML
         - Take a stab at the problem without any ML. Benchmark for how well you can do.
@@ -195,6 +219,7 @@ Chip Huyen
         - Optimize the simple ML models with different objective functions, hyperparemeter search, more data, ensembles, etc.. Determine how fast your model decays in the wild and build out infrastructure for periodically re-training.
     - 4. Complex (optional)
         - Experiment with more complex models (e.g. neural networks).
+
 - Model offline evaluation
     - Compare to baselines
         - Random baseline (e.g. MSE, F1 for uniform & task-label distribution)
@@ -220,15 +245,21 @@ Chip Huyen
             - Do this for subgroups of the data (not random)
 
 # Model deployment and prediction service
+
 - Batch deployments make periodic batches of predictions to be able to serve pre-computed predictions to users
+
 - Online deployments make realtime predictions
+
 - Companies investing in going from batch to online
     - Need real-time pipeline that can extract streaming features from incoming data, input into model and return a prediction. Should have latency on the order of milliseconds
+
 - Historically, Spark (mapreduce) has dominated batch prediction extremely effectively, but realtime requires different solution
+
 - On cloud VS on the edge
     - The edge = on device; browser, phone, car, smartwatch, etc..
     - Cloud is easier, but costly
     - Edge can run without stable internet, avoids transit of potentially sensitive data
+
 - Model optimization
     - ML-powered compiler, e.g. autoTVM, adapts model training to hardware architecture
         - Can be slow at first (e.g. for days)
@@ -240,20 +271,27 @@ Chip Huyen
         - Still relatively slow because it's limited by browser
 
 # Data distribution shifts and monitoring
+
 - Models decay in production
+
 - Failure can be operational (is it returning results) or performance (accuracy)
+
 - In google study, > 50% of ML failures stemmed from distributed systems, e.g. data pipeline error (bad data)
+
 - Production data differing from training data
     - Data constantly changing, can be sudden or gradual
     - It can also be seasonal
+
 - Edge cases
     - Outliers that cause performance to be significantly worse (not all outliers are edge cases)
     - It's tempting to remove outliers when training data, but that could lead to poor performance on edge cases
+
 - Degenerate feedback loops
     - When ML predictions themselves influence the next iteration of training
     - e.g. recommendation systems
     - Measured by diversity metrics (specifically in the long tail)
     - Simple correction is to use randomization, which hurts user experience
+
 - Data distribution shifts
     - Research classifications
         - Covariate shift
@@ -278,12 +316,14 @@ Chip Huyen
         - Address possibility of distribution shift early, e.g.
             - trade off accuracy by binning feature that tends to change frequently, such as app ranking in the app store (1-10, 11-100, 101-1000, etc..)
             - train different models for different areas, e.g. house prices in SF vs Arizona - SF model might need frequent updates
+
 - Monitoring and observability
     - User feedback can be valuable in measuring accuracy
     - Monitoring predictions is straightforward - changes in prediction distributions P(y) tend to indicate changes in underlying input distribution P(X)
     - Feature validation: min, max, median within acceptable range, regex validation, feature values belong to expected set, pairwise relationships between features are satisfied
         - Concerns: can be very expensive to monitor every feature for every model constantly, useful for debugging but not extremely helpful for detecting performance degradation, feature transformations might be missed because monitoring is done downstream
     - Monitoring raw inputs often not possible by ML team directly, since they are managed by an upstream team
+
 - Logging
     - Want to make it as easy as possible to find logged events later
     - Distributed tracing (microservice architecture idea) - each process has a unique ID that can be used to pull all related logs for that process
@@ -291,10 +331,12 @@ Chip Huyen
     - Telemetry - logs and metrics collected form remote components such as cloud services or applications run on customer devices
 
 # Continual learning and test in production
+
 - Continual learning
     - Update a challenger model (a replica of the "champion" model - the one in production) every ~1024 samples, if it performs better than the champion then replace the champion
     - Significantly cheaper than training from scratch
     - Ecom use case: adapt quickly to user behavior, e.g. during black friday event, or even during the course of a single session
+
 - Difficulties of continual learning
     - Fresh data is hard to get, one solution is pull direct from streaming before it hits the data warehouse - the data needs to be transformed (labeled) which is difficult to do in a timely way
         - e.g. Search for product, click on one = label the search query with the clicked product ID, hard to do with streaming
@@ -302,6 +344,7 @@ Chip Huyen
     - Algorithmic challenge when transforming features (e.g dim reduction) or doing an update is not well performant for small samples, this only affects extremely fast updating models, eg. hourly.
         - Neural networks relatively easy to update compared to matrix or tree-based models
         - Feature reuse can help here: features may have already been extracted for production predictions, which can be re-used to train the challenger model, this is called "log and wait"
+
 - Stages of continual learning
     - Manual, stateless retraining
         - Painful place to be, most companies without an ML platform team are here
@@ -317,9 +360,11 @@ Chip Huyen
         - Model automatically updated based on requirements, rather than fixed time interval
         - e.g. time-based (5 minutes), performance based (performance degradation), volume-based (new data), drift-based (data distribution change)
         - Can be done on the edge, e.g. ship device with base model and update it without needing centralized servers
+
 - How often to update your models
     - Train multiple models, withholding various periods of previous data.
         - e.g. to simulate going a week without training, then test a model that's been trained on data up to a week before the last week, and compare that to performance from a time window shifter up by a week
+
 - Test in production
     - Shadow deployment
         - Deploy challenger model alongside champion, watch the outputs of the challenger but do not serve to users
@@ -338,15 +383,18 @@ Chip Huyen
         - Simplest example is the e-greedy model: say e = 0.9, then you serve the best model 90% of the time, and pick a random different one 10% of the time.
 
 # Infrastructure and tooling for MLOps
+
 - Development environment
     - "if you can only set up one piece of infrastructure well, make it the dev environment for data scientists" - it improves productivity
     - Version control, e.g. Git (code), DVC (data version control), Weights & Biases (track experiments), MLflow (model artifacts)
     - CI/CD, e.g. github actions
     - Remote compute, e.g. GitHub codespaces, AWS EC2, GCP instance
         - Developers SSH into this via IDE, so all devs work with standard dependencies. Cost is about $70/month for constantly running instance with 4vCPUs and 8GB memory
+
 - Production
     - Docker compose limited to one host, kubernetes solves that by creating a network of containers that communicate, share resources and automatically scale up or down
     - Kubeflow and Metaflow (which should be used alongside a proper scheduler like AIrflow) allow for seamless work between dev and prod in the same script or notebook, parameterized data size/compute resource on a per-function basis
+
 - ML platform
     - Model deployment
     - Model storage
@@ -366,6 +414,7 @@ Chip Huyen
         - Consistency, unification of logic cross languages, for training and inference and for batch and streaming
 
 # The human side of ML
+
 - Better UX
     - Consistency-accuracy tradeoff
         - Users want consistency. Delivering this may impact accuracy
@@ -375,6 +424,7 @@ Chip Huyen
     - Smooth failing
         - e.g. models can take a long time to run
         - Strategy: have a simpler backup model that is triggered if the model is taking over X milliseconds to run a prediction
+
 - Responsible AI framework
     - Discover sources for model bias
         - Training data

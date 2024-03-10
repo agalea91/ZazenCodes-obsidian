@@ -1,22 +1,18 @@
 ---
 date: 2023-09-20
 tags:
-    - book
+  - book
 hubs:
-    - "[[data-engineering]]"
-    - "[[machine-learning]]"
-    - "[[python]]"
+  - "[[data-engineering]]"
+  - "[[machine-learning]]"
+  - "[[python]]"
+urls:
+  - https://github.com/sinanuozdemir/feature_engineering_bookcamp/tree/main/notebooks
 ---
-
 # Feature Engineering Bookcamp
-
 Author: Sindan Ozdemir
 
-Feature engineering = manipulating data into a format the optimally represents the underlying problem (that an ML algorithm is trying to model) and mitigates complexities and biases
-
-# Source code
-https://github.com/sinanuozdemir/feature_engineering_bookcamp/tree/main/notebooks
-
+- Feature engineering = manipulating data into a format the optimally represents the underlying problem (that an ML algorithm is trying to model) and mitigates complexities and biases
 # Index
 - Concepts
 - General Feature Engineering
@@ -251,7 +247,6 @@ print(f"Created features: {p.get_feature_names()}")
 ## Chapter 3
 
 ### Utility functions
-
 ```python
 import numpy as np
 np.random.seed(0)
@@ -384,7 +379,6 @@ best_model = simple_grid_search(x_train, y_train, x_test, y_test, simple_fe)
 ## Chapter 5
 
 ### Twitter NLP feature engineering pipeline
-
 ```python
 # clean tweets https://pypi.org/project/tweet-preprocessor
 
@@ -434,7 +428,6 @@ advanced_grid_search(
 ```
 
 ### TF-IDF + SVD feature engineering pipeline
-
 ```python
 from sklearn.decomposition import TruncatedSVD  # A
 
@@ -466,6 +459,7 @@ advanced_grid_search(
 # A feature extraction / dimension reduction with SVD
 # B our custom tokenizer didn't work out so well so we will remove it
 ```
+
 ## Chapter 7
 
 ### Basic timeseries model pipeline
@@ -537,7 +531,6 @@ dtype: float64
 ```
 
 ### Feature selection for timeseries data
-
 ```python
 from sklearn.feature_selection import SelectFromModel
 from sklearn.linear_model import LogisticRegression
@@ -576,7 +569,6 @@ plot_gains(test_df.copy(), test_y, test_preds)
 
 
 ### Polynomial feature extraction on timeseries data
-
 ```python
 from sklearn.preprocessing import PolynomialFeatures
 

@@ -1,9 +1,11 @@
 ---
 date: 2023-05-03
 tags:
-    - book
+  - book
 hubs:
-    - "[[gcp]]"
+  - "[[gcp]]"
+  - "[[bigquery]]"
+  - "[[dataflow]]"
 ---
 
 # Google Cloud Cookbook

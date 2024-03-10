@@ -5,24 +5,17 @@ tags:
 hubs:
     - "[[data-engineering]]"
 ---
-
-# Modern Data Engineering with Apache Spark
-
-Scott Haines
-
-> A Hands-On Guide for Building Mission-Critical Streaming Applications
-
-# Source code
 https://github.com/newfront/spark-moderndataengineering
 
+Author: Scott Haines
+
+"A Hands-On Guide for Building Mission-Critical Streaming Applications"
 
 # Index
 - General
 - Data lakes
 - Spark applications
 - Airflow
-
-
 
 # General
 - **Data wrangling**: As a data engineer, your job hinges on the ability to easily wrangle data. You will be expected to think quick and figure out ways to ingest, parse, and validate new sources of data - transforming it into clean, well structured and reliable datasets (pg. 59)

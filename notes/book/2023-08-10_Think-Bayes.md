@@ -5,9 +5,7 @@ tags:
 hubs:
     - "[[math-stats]]"
 ---
-
 # Think Bayes
-
 Author: Allen Downey
 
 ## Baye's theorem
