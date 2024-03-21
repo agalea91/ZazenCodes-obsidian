@@ -36,26 +36,30 @@ tmux kill-session -t myname
 
 Commands below must be proceeded by the bind key. The default is CTRL-b. My bind key is "CTRL-a".
 
+### Help
 ```
-# Help
 ?   list all shortcuts
+```
 
-# Panes
+### Panes
+```
 %   vertical split
 "   horizontal split
 o   swap panes
 ;   toggle last active pane
 q   show pane numbers
 x   kill pane
-+   break pane into window (e.g. to select text by mouse to copy)
--   restore pane from window
 ⍽   space - toggle between layouts
 {   move the current pane left
 }   move the current pane right
 z   toggle pane zoom
-<C-c>↕/↔    resize pane
 
-# Windows
+<C-c>↕/↔            resize pane
+:break-pane -t :    break pane into new window
+```
+
+### Windows
+```
 c   create window
 w   list windows
 n   next window
@@ -63,8 +67,10 @@ p   previous window
 f   find window
 ,   name window
 &   kill window
+```
 
-# Sessions
+### Sessions
+```
 s   list sessions
 $   name session
 ```
