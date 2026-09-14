@@ -62,14 +62,15 @@ z   toggle pane zoom
 
 ### Windows
 ```
-c   create window
-w   list windows
-n   next window
-p   previous window
-f   find window
-,   name window
-.   re-number window (change order)
-&   kill window
+c                   create window
+w                   list windows
+n                   next window
+p                   previous window
+f                   find window
+,                   name window
+.                   re-number window (change order)
+:swap-window -t <n> swap current window with window <n>
+&                   kill window
 ```
 
 ### Sessions
