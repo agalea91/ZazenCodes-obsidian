@@ -118,6 +118,9 @@ gq
 
 # Show keymaps
 g?
+
+# Open file with default Mac/system application
+s
 ```
 
 ### Dadbod-ui
@@ -142,6 +145,9 @@ vim ~/.local/share/db_ui/
 ### Telescope
 
 ```sh
+# Open all filtered/viewable (or Tab-selected) files directly into buffers
+<C-o>
+
 # Add all to qfix list
 <C-q>
 
